@@ -16,4 +16,11 @@ class Device {
       time: json['time'] as int,
     );
   }
+
+  Map<String, dynamic> toJson() =>
+      {
+        'name': name,
+        'status': status,
+        'time': time
+      };
 }
