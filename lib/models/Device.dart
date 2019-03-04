@@ -17,10 +17,29 @@ class Device {
     );
   }
 
-  Map<String, dynamic> toJson() =>
+/*
+  Map toMap(){
+
+    var map = Map<int, dynamic>();
+    //map[name] = name;
+    map[status] = status;
+    map[pin] = pin;
+    map[time] = time;
+
+    return map;
+  }
+  */
+
+
+  /*
+  Map<int, dynamic> toJson() =>
       {
-        'name': name,
-        'status': status,
-        'time': time
+        //'name': name,
+        status: status,
+        pin: pin,
+        time: time
       };
+      */
+
 }
+

@@ -8,32 +8,16 @@ import 'package:flutter_app_smart_home/screens/DeviceDetailScreen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-Future<List<Device>> fetchDevice(http.Client client) async {
-  final response =
-  await client.get('http://192.168.1.134:3000/arduino/getAllRooms');
-
-  // Use the compute function to run parsePhotos in a separate isolate
-  return compute(parseDevice, response.body);
-}
-
-// A function that converts a response body into a List<Photo>
-List<Device> parseDevice(String responseBody) {
-  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-
-  return parsed.map<Device>((json) => Device.fromJson(json)).toList();
-}
-
-
 class MyHomePage extends StatelessWidget {
-  final String title;
+  //final String title;
 
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text('Super Home'),
       ),
 
       body: FutureBuilder<List<Device>>(
@@ -76,4 +60,23 @@ class DevicesList extends StatelessWidget {
       },
     );
   }
+}
+
+
+Future<List<Device>> fetchDevice(http.Client client) async {
+
+  final response =
+  await client.get('http://127.0.0.1:3000/arduino/getAllRooms');
+  //await client.get('http://10.0.2.2:3000/arduino/getAllRooms');
+  //await client.get('http://192.168.1.134:3000/arduino/getAllRooms');
+
+  // Use the compute function to run parseDevice in a separate isolate
+  return compute(parseDevice, response.body);
+}
+
+// A function that converts a response body into a List<Device>
+List<Device> parseDevice(String responseBody) {
+  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+
+  return parsed.map<Device>((json) => Device.fromJson(json)).toList();
 }
