@@ -20,20 +20,6 @@ class DeviceDetailScreen extends StatelessWidget{
     return Scaffold(
         appBar: AppBar(
           title: Text("${objDevice.name}"),
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context,
-                    MaterialPageRoute(builder: (context) => MyHomePage(),
-                    ),
-
-                  );
-                },
-              );
-            },
-          ),
         ),
         body: Padding(
             padding: EdgeInsets.all(16.0),
@@ -41,6 +27,41 @@ class DeviceDetailScreen extends StatelessWidget{
                 child: Column(
                   children: <Widget>[
                     //Image.network('${objDevice.name}'),
+                    new Card(
+                      child: new Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          new Image.asset(
+                            objDevice.status == 1 ?
+                            'res/images/lightbulbON.png' :
+                            'res/images/lightbulbOFF.png',
+//                  height: 192.0,
+                            fit: BoxFit.fill,
+                          ),
+                          const ListTile(
+                            title: const Text('Esto es un titulo 2'),
+                            subtitle: const Text('Esto es un sibtitulo de la tarjeta.'),
+                          ),
+                          new ButtonTheme.bar(
+                            // make buttons use the appropriate styles for cards
+                            child: new ButtonBar(
+                              alignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                new FlatButton(
+                                  child: const Text('Cancelar'),
+                                  onPressed: () {},
+                                ),
+                                new FlatButton(
+                                  child: const Text('Aceptar'),
+                                  onPressed: () {},
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
                     RaisedButton(
                       child: Text('On'),
                       onPressed: () {
